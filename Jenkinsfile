@@ -6,7 +6,7 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUNTEST', defaultValue: true, description: 'Toggle this value from testing')
+        booleanParam(name: 'RUNTEST', defaultValue: true, description: 'this value from testing')
         choice(name: 'CICD', choices: ['CI', 'CICD Server'], description: 'Pick something')
     }
 
