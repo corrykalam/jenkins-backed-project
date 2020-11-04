@@ -1,0 +1,64 @@
+version: '3.3'
+
+services:
+    backend:
+        image: corrykalam/jenkins-backend-example:dev
+        container_name: backend-express
+        ports:
+            - 4321:4321
+        networks:
+            - deploy
+        depends_on:
+            - postgres
+        environment: 
+            - PORT=4321
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - REDIS_PASSWORD=redispass123
+            - DB_HOST=postgres
+            - DB_USER=postgres
+            - DB_PASSWORD=anjayman123
+            - DB_NAME=newOnlineShop
+            - JWT_KEYS=testpass123
+        deploy:
+            resources:
+                limits:
+                    cpus: '1'
+                    memory: 200M
+                reservations:
+                    cpus: '1'
+                    memory: 200M    
+    postgres:
+        image: postgres
+        container_name: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=anjayman123
+            - POSTGRES_DB=newOnlineShop
+        ports:
+            - 5432:5432
+        networks: 
+            - deploy
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+    redis:
+        image: redis
+        command: redis-server --requirepass redispass123
+        container_name: redis
+        environment: 
+            - REDIS_PORT=6379
+            - REDIS_PASSWORD=redispass123
+        ports: 
+            - 6379:6379
+        networks:
+            - deploy
+        volumes:
+            - ./redis-data:/var/lib/redis
+
+networks:
+    deploy:
+        driver: bridge
+    
+volumes:
+    postgres-data:
+    redis-data:
