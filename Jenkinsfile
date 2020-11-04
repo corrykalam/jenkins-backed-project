@@ -7,7 +7,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'RUNTEST', defaultValue: true, description: 'Toggle this value from testing')
-        choice(name: 'CICD', choices: ['CI', 'CICD Deployment', 'CICD Production'], description: 'Pick something')
+        choice(name: 'CICD', choices: ['CI', 'CICD Server'], description: 'Pick something')
     }
 
     stages {
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     CommitHash = sh (script : "git log -n 1 --pretty=format:'%H'", returnStdout: true)
-                    builderDocker = docker.build("corrykalam/jenkins-backend-example:${CommitHash}")
+                    builderDocker = docker.build("corrykalam/jenkins-backend-project:${CommitHash}")
                 }
             }
         }
@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy on server') {
             when {
                 expression {
-                    params.CICD == 'CICD Deployment' || BRANCH_NAME == 'main'
+                    params.CICD == 'CICD Server' || BRANCH_NAME == 'main'
                 }
             }
             steps {

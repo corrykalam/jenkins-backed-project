@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
     backend:
-        image: corrykalam/jenkins-backend-example:dev
+        image: corrykalam/jenkins-backend-project:main
         container_name: backend-express
         ports:
             - 4321:4321
