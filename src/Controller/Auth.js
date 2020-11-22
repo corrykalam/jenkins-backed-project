@@ -22,7 +22,6 @@ Auth.login = async (req, res) => {
             } catch (err) {
                 return res.status(500).json({ success: false, message: err })
             }
-
         } else {
             return res.status(200).json({ success: true, message: "Logged in user failed." })
         }
