@@ -19,7 +19,7 @@ Users.getAll = () => {
 Users.getDetail = (username) => {
     return new Promise((resolve, reject) => {
         database
-            .query(`SELECT u.id, u.username, u.password, u.token, r.role FROM users u INNER JOIN role r ON u.role = r.id WHERE username = '${username}'`)
+            .query(`SELECT u.id, u.username, u.password, u.token, r.role FROM users u INNER JOIN role r ON u.role = r.id WHERE username='${username}'`)
             .then((res) => {
                 resolve(res.rows)
             })
@@ -31,7 +31,7 @@ Users.getDetail = (username) => {
 
 Users.getId = (username) => {
     return new Promise((resolve, reject) => {
-        database.query(`SELECT * FROM users WHERE id = '${username}'`)
+        database.query(`SELECT * FROM users WHERE id='${username}'`)
             .then((res) => {
                 resolve(res)
             })
