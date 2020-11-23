@@ -15,8 +15,11 @@ Auth.login = async (req, res) => {
                     username: detailUsers[0].username,
                     role: detailUsers[0].role
                 }
+                console.log("1 auth")
                 const genToken = await model.genToken(payload)
+                console.log("2 auth")
                 await model.setToken(detailUsers[0].username, genToken)
+                console.log("3 auth")
                 return res.status(200).json({ success: true, token: genToken, message: "Logged in user successfully.", })
             } else {
                 return res.status(200).json({ success: true, message: "Logged in user failed." })
