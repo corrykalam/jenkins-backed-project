@@ -20,14 +20,6 @@ services:
             - DB_PASSWORD=anjayman123
             - DB_NAME=newOnlineShop
             - JWT_KEYS=testpass123
-        deploy:
-            resources:
-                limits:
-                    cpus: '1'
-                    memory: 200M
-                reservations:
-                    cpus: '1'
-                    memory: 200M    
     postgres:
         image: postgres
         container_name: postgres
