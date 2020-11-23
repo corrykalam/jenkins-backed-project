@@ -5,11 +5,10 @@ const Auth = {}
 Auth.login = async (req, res) => {
     try {
         const detailUsers = await model.getDetail(req.body.username)
-        if (detailUsers.length == 0) {
-            return res.status(200).json({ success: true, message: "Username not exist in database." })
-        } else {
+        if (detailUsers.length != 0) {
             const requestPass = req.body.password
             const check = await bcrypt.compare(requestPass, detailUsers[0].password)
+            console.log(check)
             if (check == true) {
                 const payload = {
                     username: detailUsers[0].username,
@@ -24,6 +23,8 @@ Auth.login = async (req, res) => {
             } else {
                 return res.status(200).json({ success: true, message: "Logged in user failed." })
             }
+        } else {
+            return res.status(200).json({ success: true, message: "Username not exist in database." })
         }
     } catch (err) {
         return res.status(500).json({ success: false, message: err })
