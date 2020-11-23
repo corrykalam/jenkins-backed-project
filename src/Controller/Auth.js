@@ -10,7 +10,7 @@ Auth.login = async (req, res) => {
         }
         const requestPass = req.body.password
         const check = await bcrypt.compare(requestPass, detailUsers[0].password)
-        if (check) {
+        if (check == true) {
             try {
                 const payload = {
                     username: detailUsers[0].username,
