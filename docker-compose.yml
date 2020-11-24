@@ -5,13 +5,13 @@ services:
         image: corrykalam/jenkins-backend-project:main
         container_name: backend-express
         ports:
-            - 3455:3455
+            - 4321:4321
         networks:
             - deploy
         depends_on:
             - postgres
         environment: 
-            - PORT=3455
+            - PORT=4321
             - REDIS_HOST=redis
             - REDIS_PORT=6379
             - REDIS_PASSWORD=redispass123
