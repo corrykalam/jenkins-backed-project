@@ -62,11 +62,6 @@ RUN { \
     && fc-cache -fv
 
 
-#### Phantom JS
-RUN npm install phantomjs
-RUN apt-get install libfontconfig -y
-
-### Phantom JS
 
 WORKDIR /usr/src/app
 
